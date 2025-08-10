@@ -15,36 +15,57 @@
     }
     #starsInSky {
       position:absolute;
-      width:100vw;height:100vh;top:0;left:0;
+      width:100vw; height:100vh;
+      top:0; left:0;
       pointer-events:none;
       z-index:11;
     }
+    /* 별 크기 1/3, 오각별 모양 */
     .big-star {
       position:absolute;
-      width:18px;height:18px;
-      left:0;top:0;transform:translate(-50%,-50%);
+      width:6px; height:6px;
+      left:0; top:0;
+      transform:translate(-50%, -50%);
+      background: transparent;
+      clip-path: polygon(
+        50% 0%, 
+        61% 35%, 98% 35%, 
+        68% 57%, 79% 91%,
+        50% 70%, 21% 91%, 
+        32% 57%, 2% 35%, 
+        39% 35%
+      );
       background: #ffe066;
-      border-radius: 50%;
-      border: none;
-      box-shadow: 0 0 7px 2px #ffe06677, 0 0 0 1.5px #fff8cc;
+      box-shadow: 0 0 4px 1.5px #ffe06677, 0 0 0 1px #fff8cc;
       z-index:10;
       pointer-events:auto;
       cursor:pointer;
       user-select:none;
-      transition:box-shadow .18s;
+      transition: box-shadow 0.18s;
       outline:none;
     }
-    .big-star:active, .big-star:hover {
-      box-shadow:0 0 16px 6px #ffe066cc, 0 0 0 2px #fff8cc;
+    .big-star:hover,
+    .big-star:active {
+      box-shadow: 0 0 9px 3px #ffe066cc, 0 0 0 2px #fff8cc;
     }
     .star {
-      position:absolute;width:2px;height:2px;background:white;border-radius:50%;
-      opacity:0.7;animation:twinkle 2s infinite alternate;pointer-events:none;
+      position:absolute;
+      width:2px; height:2px;
+      background:white;
+      border-radius:50%;
+      opacity:0.7;
+      animation: twinkle 2s infinite alternate;
+      pointer-events:none;
     }
-    @keyframes twinkle {from {opacity:0.65;} to {opacity:1;}}
+    @keyframes twinkle {
+      from {opacity:0.65;}
+      to   {opacity:1;}
+    }
     .center-btn {
       position:absolute;
-      bottom:60px; left:50%; transform:translateX(-50%);
+      bottom:60px;
+      left:50%;
+      transform:translateX(-50%);
       background: #f8f9fa;
       color: #232323;
       border:none;
@@ -56,19 +77,29 @@
       box-shadow: 0 2.5px 16px rgba(0,0,0,0.03);
       z-index:50;
       letter-spacing:0.02em;
-      transition:background .17s,color .18s;
+      transition:background .17s, color .18s;
       outline:none;
     }
-    .center-btn:hover, .center-btn:focus { background:#ececec; color:#3b3464; }
-    .modal{
+    .center-btn:hover,
+    .center-btn:focus {
+      background:#ececec;
+      color:#3b3464;
+    }
+    .modal {
       display:none;
       position:fixed;
-      top:0;left:0;width:100vw;height:100vh;
+      top:0; left:0;
+      width:100vw;
+      height:100vh;
       background:rgba(0,0,0,0.75);
-      z-index:100;justify-content:center;align-items:center;
+      z-index:100;
+      justify-content:center;
+      align-items:center;
     }
-    .modal.open{display:flex;}
-    .modal-content{
+    .modal.open {
+      display:flex;
+    }
+    .modal-content {
       background:#23253a;
       padding:30px 20px 20px;
       border-radius:17px;
@@ -84,19 +115,22 @@
       background:#23253a;
       display:block;
       margin:0 auto 10px auto;
-      width:240px;height:240px;
-      max-width:100%;max-height:60vw;
+      width:240px; height:240px;
+      max-width:100%;
+      max-height:60vw;
     }
     #signatureModalCanvas {
       width:240px; height:240px;
       border-radius:12px;
       border:2px solid #ffe066;
       background:#fff;
-      max-width:100%;max-height:60vw;
+      max-width:100%;
+      max-height:60vw;
     }
-    .modal-content button{
+    .modal-content button {
       margin-top:10px;
-      background:#efefef;color:#23253a;
+      background:#efefef;
+      color:#23253a;
       border:none;
       border-radius:8px;
       padding:9px 24px;
@@ -105,11 +139,16 @@
       font-weight:500;
       box-shadow:0 2px 8px rgba(0,0,0,0.04);
     }
-    .modal-content button:hover{background:#e2e2e2;}
-    .feedback-msg{
+    .modal-content button:hover {
+      background:#e2e2e2;
+    }
+    .feedback-msg {
       position:fixed;
-      top:84px;left:50%;transform:translateX(-50%);
-      background:#23253a;color:#ffe066;
+      top:84px;
+      left:50%;
+      transform:translateX(-50%);
+      background:#23253a;
+      color:#ffe066;
       padding:13px 25px;
       border-radius:13px;
       font-size:17px;
@@ -119,22 +158,49 @@
       box-shadow:0 3px 10px rgba(0,0,0,0.08);
     }
 
-    /* 모바일 및 태블릿 대응 */
+    /* 테블릿 대응 (아이패드, 안드로이드 태블릿 등) */
+    @media (max-width: 1024px) {
+      .modal-content {
+        width: 85vw !important;
+        max-width: 85vw !important;
+        min-width: 0 !important;
+        padding: 7vw 2vw 2vw !important;
+        font-size: 1.08em !important;
+      }
+      #profile-canvas,
+      #signatureModalCanvas {
+        width: 80vw !important;
+        height: 80vw !important;
+        max-width: 80vw !important;
+        max-height: 80vw !important;
+      }
+      .center-btn {
+        width: 88vw !important;
+        max-width: 88vw !important;
+        font-size: 1.12em !important;
+        bottom: 38px !important;
+        border-radius: 22px !important;
+        padding: 18px 0 !important;
+      }
+    }
+
+    /* 모바일 대응 */
     @media (max-width: 768px) {
       .modal-content {
         width: 94vw !important;
         max-width: 94vw !important;
-        padding:12vw 2vw 2vw !important;
-        min-width:0;
+        padding: 12vw 2vw 2vw !important;
+        min-width: 0;
       }
-      #profile-canvas, #signatureModalCanvas {
-        width:88vw !important;
-        height:88vw !important;
-        max-width:88vw !important;
-        max-height:88vw !important;
+      #profile-canvas,
+      #signatureModalCanvas {
+        width: 88vw !important;
+        height: 88vw !important;
+        max-width: 88vw !important;
+        max-height: 88vw !important;
       }
       .center-btn {
-        bottom:36px !important;
+        bottom: 36px !important;
         padding: 14px 20px !important;
         font-size: 16px !important;
         width: 92vw !important;
@@ -142,20 +208,22 @@
         border-radius: 18px !important;
       }
     }
+
     @media (max-width: 480px) {
       .modal-content {
-        padding:7vw 1vw 1vw !important;
+        padding: 7vw 1vw 1vw !important;
       }
-      #profile-canvas, #signatureModalCanvas {
-        width:92vw !important;
-        height:92vw !important;
-        max-width:92vw !important;
-        max-height:92vw !important;
+      #profile-canvas,
+      #signatureModalCanvas {
+        width: 92vw !important;
+        height: 92vw !important;
+        max-width: 92vw !important;
+        max-height: 92vw !important;
       }
       .center-btn {
-        font-size:15px !important;
-        bottom:17px !important;
-        padding:12px 12px !important;
+        font-size: 15px !important;
+        bottom: 17px !important;
+        padding: 12px 12px !important;
       }
     }
   </style>
@@ -165,136 +233,146 @@
   <div id="starsInSky"></div>
   <div class="feedback-msg" id="feedbackMsg"></div>
   <button class="center-btn" id="makeStarBtn"></button>
-  <div class="modal" id="modal"><div class="modal-content">
-    <canvas id="profile-canvas" width="240" height="240"></canvas>
-    <button id="launchStarBtn" type="button">별을 띄우기</button>
-  </div></div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <canvas id="profile-canvas" width="240" height="240"></canvas>
+      <button id="launchStarBtn" type="button">별을 띄우기</button>
+    </div>
+  </div>
+
   <div class="modal" id="signatureModal">
     <div class="modal-content">
       <canvas id="signatureModalCanvas" width="240" height="240"></canvas>
-      <br>
+      <br/>
       <button onclick="document.getElementById('signatureModal').classList.remove('open');">닫기</button>
     </div>
   </div>
+
   <script>
-    // 밤하늘 배경 별
-    for(let i=0;i<60;i++){
+    // 밤하늘 배경 별 작은 점들
+    for(let i=0; i<60; i++){
       const st=document.createElement('div');
       st.className='star';
-      st.style.top=Math.random()*60+'%';
-      st.style.left=Math.random()*100+'%';
-      st.style.opacity=0.6+Math.random()*0.4;
-      st.style.width=st.style.height=`${1+Math.random()*2}px`;
-      st.style.animationDuration=`${1+Math.random()*2}s`;
+      st.style.top= Math.random()*60 + '%';
+      st.style.left= Math.random()*100 + '%';
+      st.style.opacity= 0.6 + Math.random()*0.4;
+      st.style.width= st.style.height= `${1 + Math.random()*2}px`;
+      st.style.animationDuration= `${1 + Math.random()*2}s`;
       document.getElementById('stars').appendChild(st);
     }
 
-    const modal=document.getElementById('modal');
-    const signatureModal=document.getElementById('signatureModal');
-    const makeStarBtn=document.getElementById('makeStarBtn');
-    const launchStarBtn=document.getElementById('launchStarBtn');
-    const canvas=document.getElementById('profile-canvas');
-    const ctx=canvas.getContext('2d');
+    const modal = document.getElementById('modal');
+    const signatureModal = document.getElementById('signatureModal');
+    const makeStarBtn = document.getElementById('makeStarBtn');
+    const launchStarBtn = document.getElementById('launchStarBtn');
+
+    const canvas = document.getElementById('profile-canvas');
+    const ctx = canvas.getContext('2d');
     const sigModalCanvas = document.getElementById('signatureModalCanvas');
     const sigModalCtx = sigModalCanvas.getContext('2d');
 
-    let img=new window.Image();
-    img.src="1.png";
-    img.onload=function(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);}
+    let img = new window.Image();
+    img.src = "1.png";
+    img.onload = function() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+
     let drawing = false, signature = [];
 
-    // 서명 입력 가능 영역 지정
-    function isInSignArea(y){return y>=canvas.height*0.85&&y<=canvas.height*0.93;}
-    function isInHorizontalSignArea(x){return x>=canvas.width*0.4&&x<=canvas.width*0.6;}
-    function isInSignAreaWithHorizontal(x,y){return isInSignArea(y)&&isInHorizontalSignArea(x);}
-    function drawProfile(bgImg,sigPoints){
+    // 서명 그리기 (캔버스 전체 영역 가능)
+    function drawProfile(bgImg, sigPoints){
       ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.drawImage(bgImg,0,0,canvas.width,canvas.height);
-      ctx.strokeStyle="#222"; ctx.lineWidth=3; ctx.lineCap="round";
-      if(sigPoints&&sigPoints.length){
+      ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = "#222";
+      ctx.lineWidth = 3;
+      ctx.lineCap = "round";
+      if(sigPoints && sigPoints.length){
         ctx.beginPath();
-        for(let i=0;i<sigPoints.length;i++){
-          const p=sigPoints[i];
-          if(p.move)ctx.moveTo(p.x,p.y);
-          else ctx.lineTo(p.x,p.y);
+        for(let i=0; i<sigPoints.length; i++){
+          const p = sigPoints[i];
+          if(p.move) ctx.moveTo(p.x, p.y);
+          else ctx.lineTo(p.x, p.y);
         }
         ctx.stroke();
       }
     }
-    // 서명 입력 이벤트
-    canvas.addEventListener('mousedown',e=>{
-      if(isInSignAreaWithHorizontal(e.offsetX,e.offsetY)){
-        drawing=true;
-        signature.push({x:e.offsetX,y:e.offsetY,move:true});
-        drawProfile(img,signature);
-      }
-    });
-    canvas.addEventListener('mousemove',e=>{
-      if(drawing){
-        signature.push({x:e.offsetX,y:e.offsetY,move:false});
-        drawProfile(img,signature);
-      }
-    });
-    canvas.addEventListener('mouseup',()=>drawing=false);
-    canvas.addEventListener('mouseleave',()=>drawing=false);
-    canvas.addEventListener('touchstart',(e)=>{
-      e.preventDefault();
-      let t=e.touches[0],r=canvas.getBoundingClientRect(),x=t.clientX-r.left,y=t.clientY-r.top;
-      if(isInSignAreaWithHorizontal(x,y)){
-        drawing=true;
-        signature.push({x,y,move:true});
-        drawProfile(img,signature);
-      }
-    },{passive:false});
-    canvas.addEventListener('touchmove',(e)=>{
-      e.preventDefault();
-      if(drawing){
-        let t=e.touches[0],r=canvas.getBoundingClientRect();
-        signature.push({x:t.clientX-r.left,y:t.clientY-r.top,move:false});
-        drawProfile(img,signature);
-      }
-    },{passive:false});
-    canvas.addEventListener('touchend',()=>drawing=false);
 
-    // 별 저장/출력
+    // 싸인 입력 이벤트 (캔버스 전체)
+    canvas.addEventListener('mousedown', e => {
+      drawing = true;
+      signature.push({x:e.offsetX, y:e.offsetY, move:true});
+      drawProfile(img, signature);
+    });
+    canvas.addEventListener('mousemove', e => {
+      if(drawing){
+        signature.push({x:e.offsetX, y:e.offsetY, move:false});
+        drawProfile(img, signature);
+      }
+    });
+    canvas.addEventListener('mouseup', () => { drawing = false; });
+    canvas.addEventListener('mouseleave', () => { drawing = false; });
+    canvas.addEventListener('touchstart', e => {
+      e.preventDefault();
+      let t = e.touches[0], r = canvas.getBoundingClientRect();
+      drawing = true;
+      signature.push({x: t.clientX - r.left, y: t.clientY - r.top, move:true});
+      drawProfile(img, signature);
+    }, {passive:false});
+    canvas.addEventListener('touchmove', e => {
+      e.preventDefault();
+      if(drawing){
+        let t = e.touches[0], r = canvas.getBoundingClientRect();
+        signature.push({x: t.clientX - r.left, y: t.clientY - r.top, move:false});
+        drawProfile(img, signature);
+      }
+    }, {passive:false});
+    canvas.addEventListener('touchend', () => { drawing = false; });
+
+    // 별 저장
     function saveStar(top, left, sig) {
-      let starArr = JSON.parse(localStorage.getItem('bigStars')||'[]');
-      starArr.push({ top: top+'%', left: left+'%', sig });
+      let starArr = JSON.parse(localStorage.getItem('bigStars') || '[]');
+      starArr.push({ top: top + '%', left: left + '%', sig });
       localStorage.setItem('bigStars', JSON.stringify(starArr));
     }
+
+    // 별 보여주기
     function showAllStars(){
-      const sky=document.getElementById('starsInSky');
+      const sky = document.getElementById('starsInSky');
       sky.innerHTML = '';
-      const starArr = JSON.parse(localStorage.getItem('bigStars')||'[]');
-      starArr.forEach(star=>{
-        const b=document.createElement('div');
-        b.className='big-star';
-        b.style.top=star.top;
-        b.style.left=star.left;
-        b.onclick=function(e){
+      const starArr = JSON.parse(localStorage.getItem('bigStars') || '[]');
+      starArr.forEach(star => {
+        const b = document.createElement('div');
+        b.className = 'big-star';
+        b.style.top = star.top;
+        b.style.left = star.left;
+        b.onclick = e => {
           e.stopPropagation();
           showSignatureWithBgModal(star.sig);
           showFeedback('별을 클릭하면 당신의 선언문이 보입니다!');
-        }
+        };
         sky.appendChild(b);
       });
-      makeStarBtn.textContent = (starArr.length+1)+'번째 절주선언문 작성하기';
-      makeStarBtn.style.display=''; // 항상 노출
+      makeStarBtn.textContent = (starArr.length + 1) + '번째 절주선언문 작성하기';
+      makeStarBtn.style.display = '';
     }
+
+    // 클릭한 별에 서명 모달 보여주기
     function showSignatureWithBgModal(sig){
       let modalBgImg = new window.Image();
       modalBgImg.onload = function(){
         sigModalCtx.clearRect(0,0,240,240);
-        sigModalCtx.drawImage(modalBgImg,0,0,240,240);
-        sigModalCtx.strokeStyle="#222";
-        sigModalCtx.lineWidth=3;
-        sigModalCtx.lineCap="round";
+        sigModalCtx.drawImage(modalBgImg, 0, 0, 240, 240);
+        sigModalCtx.strokeStyle = "#222";
+        sigModalCtx.lineWidth = 3;
+        sigModalCtx.lineCap = "round";
         if(sig && sig.length){
           sigModalCtx.beginPath();
-          for(let i=0;i<sig.length;i++){
-            const p=sig[i];
-            if(p.move) sigModalCtx.moveTo(p.x,p.y);
-            else sigModalCtx.lineTo(p.x,p.y);
+          for(let i=0; i<sig.length; i++){
+            const p = sig[i];
+            if(p.move) sigModalCtx.moveTo(p.x, p.y);
+            else sigModalCtx.lineTo(p.x, p.y);
           }
           sigModalCtx.stroke();
         }
@@ -303,33 +381,41 @@
       modalBgImg.src = "1.png";
     }
 
-    // 별 띄우기(별 사인만 기록)
-    launchStarBtn.onclick=function(e){
+    // 별 띄우기 버튼 클릭
+    launchStarBtn.onclick = e => {
       e.preventDefault();
       const sigCopy = JSON.parse(JSON.stringify(signature));
-      const top=10+Math.random()*60, left=10+Math.random()*80;
+      const top = 10 + Math.random() * 60;
+      const left = 10 + Math.random() * 80;
       saveStar(top, left, sigCopy);
       modal.classList.remove('open');
       showAllStars();
     };
-    // 버튼 이벤트
-    makeStarBtn.onclick=()=>{
+
+    // 선언문 작성 버튼 클릭 이벤트
+    makeStarBtn.onclick = () => {
       modal.classList.add('open');
-      signature=[];
-      drawProfile(img,signature);
-    }
+      signature = [];
+      drawProfile(img, signature);
+    };
+
+    // 별 목록 초기화면에 출력
     showAllStars();
 
+    // 간단한 피드백 메시지 표시
     function showFeedback(msg){
-      const feedbackMsg=document.getElementById('feedbackMsg');
-      feedbackMsg.innerHTML=msg;
-      feedbackMsg.style.display='block';
-      setTimeout(()=>{feedbackMsg.style.display='none';},2000);
+      const feedbackMsg = document.getElementById('feedbackMsg');
+      feedbackMsg.innerHTML = msg;
+      feedbackMsg.style.display = 'block';
+      setTimeout(() => {
+        feedbackMsg.style.display = 'none';
+      }, 2000);
     }
-    // 모달 외부 클릭시 닫힘
-    window.onclick=function(e){
-      if(e.target===modal) modal.classList.remove('open');
-      if(e.target===signatureModal) signatureModal.classList.remove('open');
+
+    // 모달 외 클릭 시 닫기
+    window.onclick = e => {
+      if(e.target === modal) modal.classList.remove('open');
+      if(e.target === signatureModal) signatureModal.classList.remove('open');
     };
   </script>
 </body>
